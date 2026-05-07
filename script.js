@@ -263,5 +263,41 @@ window.addEventListener('click', (e) => {
     }
 });
 
+// Update Active State on Scroll
+function updateActiveNavLink() {
+    const sections = ['home', 'clinics', 'shops', 'contact'];
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${id}`) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Also update desktop nav if needed
+                document.querySelectorAll('nav ul li a').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${id}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNavLink);
+
 // Run init
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    updateActiveNavLink();
+});
