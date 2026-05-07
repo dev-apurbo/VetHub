@@ -243,16 +243,6 @@ const contactForm = document.getElementById('contactForm');
 const successModal = document.getElementById('successModal');
 const closeModal = document.getElementById('closeModal');
 
-// Inject Formspree URL from environment variable
-if (contactForm) {
-    const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL;
-    if (formspreeUrl) {
-        contactForm.action = formspreeUrl;
-    } else {
-        console.error("Formspree URL not found in environment variables.");
-    }
-}
-
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -269,7 +259,7 @@ if (contactForm) {
         const formData = new FormData(this);
         
         try {
-            const response = await fetch(contactForm.action, {
+            const response = await fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
