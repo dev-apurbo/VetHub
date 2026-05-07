@@ -4,56 +4,72 @@ const clinics = [
         address: "Darikhorbona Moor, Uposhohor, Rajshahi",
         phone: "01780-790526",
         services: ["Bird Treatment", "Pet Surgery", "General Checkup"],
-        coords: "Darikhorbona+Moor+Rajshahi"
+        coords: "Darikhorbona+Moor+Rajshahi",
+        rating: 4.3,
+        reviews: 108
     },
     {
         name: "Pet Care",
         address: "Besides Agrani Bank, Uttora Clinic Moor, Uposhahar Road, Rajshahi",
         phone: "01907-395718",
         services: ["Surgery", "Vaccination", "Emergency Care"],
-        coords: "Uttora+Clinic+Moor+Rajshahi"
+        coords: "Uttora+Clinic+Moor+Rajshahi",
+        rating: 4.7,
+        reviews: 47
     },
     {
         name: "Pet 360°",
         address: "Vodra Moor (Opposite to Best Buy), Rajshahi",
         phone: "01771-533043",
         services: ["Dental Care", "Grooming", "Pathology"],
-        coords: "Pet 360°, Vodra moar(opposit to Best Buy, Rajshahi 6207"
+        coords: "Pet 360°, Vodra moar(opposit to Best Buy, Rajshahi 6207",
+        rating: 5.0,
+        reviews: 57
     },
     {
         name: "Dr. Shazid's Pet Clinic",
         address: "Vodra Moor, Rajshahi",
         phone: "N/A",
         services: ["Consultation", "Pet Nutrition", "Skin Care"],
-        coords: "Dr+Shazid+Pet+Clinic+Vodra+Moor+Rajshahi"
+        coords: "Dr+Shazid+Pet+Clinic+Vodra+Moor+Rajshahi",
+        rating: 4.5,
+        reviews: 26
     },
     {
         name: "Vet & Pet Care and Cure",
         address: "Rajshahi City",
         phone: "01703-501962",
         services: ["Home Service", "Vaccination", "Consultation"],
-        coords: "Rajshahi+City"
+        coords: "Rajshahi+City",
+        rating: 4.8,
+        reviews: 29
     },
     {
         name: "RU Veterinary Teaching Hospital",
         address: "Department of Veterinary Sciences, Rajshahi University",
-        phone: "N/A",
+        phone: "01326520709",
         services: ["Advanced Research", "Surgery", "Inpatient Care"],
-        coords: "Rajshahi+University+Veterinary+Hospital"
+        coords: "Rajshahi+University+Veterinary+Hospital",
+        rating: 5.0,
+        reviews: 1
     },
     {
         name: "Model Veterinary Clinic",
         address: "Rajshahi",
         phone: "01751-226243",
         services: ["Pathology", "Research", "Pet Care"],
-        coords: "Rajshahi"
+        coords: "Rajshahi",
+        rating: 5.0,
+        reviews: 6
     },
     {
         name: "Kitty Cat Rajshahi",
         address: "Rajshahi City",
         phone: "01321-521818",
         services: ["Cat Specialist", "Vaccination", "Deworming"],
-        coords: "Kitty+Cat+Rajshahi"
+        coords: "Kitty+Cat+Rajshahi",
+        rating: 4.7,
+        reviews: 32
     }
 ];
 
@@ -63,35 +79,45 @@ const shops = [
         address: "Ground Floor, Baharampur Bank Colony, Rajpara, Rajshahi",
         phone: "01726-421070",
         items: ["Cat & Dog Food", "Pet Medicines", "Supplements", "Accessories"],
-        coords: "Baharampur+Bank+Colony+Rajshahi"
+        coords: "Baharampur+Bank+Colony+Rajshahi",
+        rating: 4.3,
+        reviews: 11
     },
     {
         name: "Pet 360° (Shop)",
         address: "Vodra Moor (Opposite to Best Buy), Rajshahi",
         phone: "01771-533043",
         items: ["Premium Pet Food", "Grooming Kits", "Toys", "Cages"],
-        coords: "Vodra+Moor+Rajshahi"
+        coords: "Vodra+Moor+Rajshahi",
+        rating: 5.0,
+        reviews: 57
     },
     {
         name: "Rajshahi Pet Care & Shop",
         address: "Uttara Clinic More, Beside Agrani Bank, Rajshahi",
         phone: "01907-395718",
         items: ["Pet Food", "Pet Care Products", "Aquarium Supplies"],
-        coords: "Uttara+Clinic+More+Rajshahi"
+        coords: "Uttara+Clinic+More+Rajshahi",
+        rating: 4.7,
+        reviews: 47
     },
     {
         name: "Posha Ghor (Pet Shop)",
         address: "Darikhorbona Moor, Uposhohor, Rajshahi",
         phone: "01780-790526",
         items: ["Birds & Bird Food", "Exotic Pet Supplies", "Pet Food", "Medicines"],
-        coords: "Darikhorbona+Moor+Rajshahi"
+        coords: "Darikhorbona+Moor+Rajshahi",
+        rating: "N/A",
+        reviews: 0
     },
     {
         name: "Kitty Cat Supplies",
         address: "Rajshahi City",
         phone: "01321-521818",
         items: ["Specialized Cat Food", "Litter boxes", "Cat Accessories"],
-        coords: "Kitty+Cat+Rajshahi"
+        coords: "Kitty+Cat+Rajshahi",
+        rating: 4.7,
+        reviews: 32
     }
 ];
 
@@ -111,8 +137,19 @@ function createCard(data, type) {
     const tag = type === 'clinic' ? 'Services' : 'Products';
     const items = type === 'clinic' ? data.services : data.items;
 
+    const ratingHtml = data.rating !== "N/A" 
+        ? `<div class="rating">
+            <i class="fas fa-star"></i>
+            <span>${data.rating}</span>
+            <span class="reviews">(${data.reviews} reviews)</span>
+           </div>`
+        : '';
+
     card.innerHTML = `
-        <h3>${data.name}</h3>
+        <div class="card-header">
+            <h3>${data.name}</h3>
+            ${ratingHtml}
+        </div>
         <div class="clinic-info">
             <div class="info-item">
                 <i class="fas fa-location-dot" aria-hidden="true"></i>

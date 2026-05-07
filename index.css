@@ -239,10 +239,48 @@ nav ul li a:hover, nav ul li a.active {
     box-shadow: var(--shadow-lg);
 }
 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
 .clinic-card h3 {
     color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #fffbeb;
+    padding: 0.4rem 0.75rem;
+    border-radius: 50px;
+    border: 1px solid #fde68a;
+    flex-shrink: 0;
+}
+
+.rating i {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.rating span {
+    font-weight: 700;
+    color: #92400e;
+    font-size: 0.9rem;
+}
+
+.rating .reviews {
+    font-weight: 400;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    margin-left: 0.1rem;
 }
 
 .clinic-info {
