@@ -201,5 +201,67 @@ document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
     });
 });
 
+// Form Submission Handling
+const contactForm = document.getElementById('contactForm');
+const successModal = document.getElementById('successModal');
+const closeModal = document.getElementById('closeModal');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('.submit-btn');
+        const btnText = submitBtn.querySelector('span');
+        const btnIcon = submitBtn.querySelector('i');
+        
+        // Loading state
+        submitBtn.classList.add('loading');
+        btnText.textContent = 'Sending...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
+        
+        const formData = new FormData(this);
+        
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                successModal.classList.add('active');
+                this.reset();
+            } else {
+                const data = await response.json();
+                alert(data.error || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            alert('Could not connect to the server. Please check your internet.');
+        } finally {
+            // Reset button
+            submitBtn.classList.remove('loading');
+            btnText.textContent = 'Send Message';
+            btnIcon.className = 'fas fa-paper-plane';
+        }
+    });
+}
+
+// Modal closing logic
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        successModal.classList.remove('active');
+    });
+}
+
+// Close modal when clicking outside content
+window.addEventListener('click', (e) => {
+    if (e.target === successModal) {
+        successModal.classList.remove('active');
+    }
+});
+
 // Run init
 document.addEventListener('DOMContentLoaded', init);

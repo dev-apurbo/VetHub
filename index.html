@@ -95,7 +95,7 @@
             </div>
             
             <div class="contact-container">
-                <form action="https://formspree.io/f/xdabdpok" method="POST" class="contact-form">
+                <form action="https://formspree.io/f/xdabdpok" method="POST" class="contact-form" id="contactForm">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" name="name" id="name" placeholder="Your name" required>
@@ -147,5 +147,17 @@
             <p style="margin-top: 0.75rem; font-size: 0.85rem;">Developed with <i class="fas fa-bolt" style="color: var(--accent);"></i> by <strong>Antigravity</strong></p>
         </div>
     </footer>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. We've received your message and will get back to you shortly.</p>
+            <button id="closeModal" class="btn btn-primary">Great, Thanks!</button>
+        </div>
+    </div>
 </body>
 </html>
