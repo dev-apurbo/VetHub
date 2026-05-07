@@ -154,9 +154,13 @@ nav ul li a:hover {
     transform: scale(1.05);
 }
 
-/* Clinic Grid */
-.clinics-section {
+/* Clinic & Shop Grids */
+.clinics-section, .shops-section {
     padding: 5rem 10%;
+}
+
+.shops-section {
+    background-color: var(--secondary);
 }
 
 .section-title {
@@ -174,7 +178,7 @@ nav ul li a:hover {
     color: var(--text-light);
 }
 
-.clinic-grid {
+.clinic-grid, .shop-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
