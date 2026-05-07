@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajshahi Vet Finder | Best Veterinary Clinics in Rajshahi</title>
-    <meta name="description" content="Find the best veterinary clinics and animal hospitals in Rajshahi, Bangladesh. Complete details, contact info, and locations for your pets.">
+    <title>Rajshahi Vet Finder | Best Veterinary Clinics & Pet Shops</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Find Expert Care for Your Pets">
+    <meta name="description" content="Discover the most trusted veterinary clinics and pet food shops in Rajshahi, Bangladesh. Find verified contact details, locations, and services.">
+    <meta name="keywords" content="vet rajshahi, pet food rajshahi, veterinary clinics rajshahi, pet care rajshahi, vet finder">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rajshahivet.com/">
+    <meta property="og:title" content="Rajshahi Vet Finder | Best Veterinary Clinics & Pet Shops">
+    <meta property="og:description" content="Discover the most trusted veterinary clinics and pet food shops in Rajshahi. Verified contact details and locations.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
+
     <link rel="stylesheet" href="index.css">
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -15,53 +27,81 @@
         <div class="logo">
             <i class="fas fa-paw"></i> Rajshahi<span>Vet</span>
         </div>
-        <nav>
+        <nav aria-label="Main Navigation">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#clinics">Clinics</a></li>
                 <li><a href="#shops">Pet Shops</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <h1 class="animate-up">Find Expert Care for Your Pets</h1>
-        <p class="animate-up" style="animation-delay: 0.2s;">Discover the most trusted veterinary clinics and pet food shops in Rajshahi, Bangladesh.</p>
-        <div class="search-container animate-up" style="animation-delay: 0.4s;">
-            <input type="text" id="clinicSearch" placeholder="Search for clinics or shops...">
-            <button id="searchBtn">Search</button>
-        </div>
-    </section>
+    <main>
+        <section class="hero" id="home">
+            <h1 class="animate-up">Expert Care for Your Best Friends</h1>
+            <p class="animate-up" style="animation-delay: 0.2s;">Rajshahi's most trusted directory for veterinary professionals and quality pet supplies.</p>
+            <div class="search-container animate-up" style="animation-delay: 0.4s;">
+                <label for="clinicSearch" class="sr-only">Search clinics or shops</label>
+                <input type="text" id="clinicSearch" placeholder="Search for clinics, food, or area...">
+                <button id="searchBtn" aria-label="Perform search">Search</button>
+            </div>
+        </section>
 
-    <section class="clinics-section" id="clinics">
-        <div class="section-title">
-            <h2>Verified Clinics</h2>
-            <p>Providing the best medical services for your beloved animals</p>
-        </div>
-        
-        <div class="clinic-grid" id="clinicGrid">
-            <!-- Clinics will be injected here by JavaScript -->
-        </div>
-    </section>
+        <section class="clinics-section" id="clinics">
+            <div class="section-title">
+                <h2>Verified Clinics</h2>
+                <p>Top-rated medical services for your beloved animals</p>
+            </div>
+            <div class="clinic-grid" id="clinicGrid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
 
-    <section class="shops-section" id="shops">
-        <div class="section-title">
-            <h2>Pet Food & Accessories</h2>
-            <p>Top-rated shops for quality pet food and supplies in Rajshahi</p>
-        </div>
-        
-        <div class="shop-grid" id="shopGrid">
-            <!-- Shops will be injected here by JavaScript -->
-        </div>
-    </section>
+        <section class="shops-section" id="shops">
+            <div class="section-title">
+                <h2>Pet Food & Accessories</h2>
+                <p>Quality food and supplies from trusted local retailers</p>
+            </div>
+            <div class="shop-grid" id="shopGrid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
 
-    <footer id="contact">
+        <section class="contact-section" id="contact">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p>Have a query or suggestion for improvement? We'd love to hear from you!</p>
+            </div>
+            
+            <div class="contact-container">
+                <form action="https://formspree.io/f/xdabdpok" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" name="name" id="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" name="email" id="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message / Suggestion</label>
+                        <textarea name="message" id="message" rows="5" placeholder="How can we improve RajshahiVet?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="footer-content">
             <div class="footer-brand">
                 <h4>RajshahiVet</h4>
-                <p>Connecting pet owners with the best veterinary professionals and food shops in the City of Silk.</p>
+                <p>Dedicated to improving pet life in Rajshahi by connecting owners with top-tier professionals.</p>
             </div>
             <div class="footer-links">
                 <h5>Quick Links</h5>
@@ -69,24 +109,23 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#clinics">Find Clinics</a></li>
                     <li><a href="#shops">Pet Shops</a></li>
-                    <li><a href="#">Emergency Care</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h5>Contact Us</h5>
+                <h5>Categories</h5>
                 <ul>
-                    <!-- <li><i class="fas fa-envelope"></i> contact@rajshahivet.com</li> -->
-                    <!-- <li><i class="fas fa-phone"></i> +880 1700 000000</li> -->
-                    <li><i class="fas fa-location-dot"></i> Rajshahi, Bangladesh</li>
+                    <li><a href="#clinics">Vet Clinics</a></li>
+                    <li><a href="#shops">Pet Food</a></li>
+                    <li><a href="#shops">Accessories</a></li>
+                    <li><a href="#clinics">Emergency</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Rajshahi Vet Finder. All rights reserved.</p>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem;">Developed with <i class="fas fa-bolt" style="color: var(--accent);"></i> by <strong>Antigravity</strong></p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

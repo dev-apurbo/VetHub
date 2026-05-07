@@ -100,112 +100,85 @@ const shopGrid = document.getElementById('shopGrid');
 const searchInput = document.getElementById('clinicSearch');
 const searchBtn = document.getElementById('searchBtn');
 
-function displayClinics(filteredClinics) {
-    clinicGrid.innerHTML = '';
+/**
+ * Creates a card element for either clinic or shop
+ */
+function createCard(data, type) {
+    const card = document.createElement('div');
+    card.className = 'clinic-card animate-up';
     
-    if (filteredClinics.length === 0) {
-        clinicGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light); padding: 2rem;">No clinics found matching your search.</p>';
-        return;
-    }
+    const icon = type === 'clinic' ? 'fa-kit-medical' : 'fa-bag-shopping';
+    const tag = type === 'clinic' ? 'Services' : 'Products';
+    const items = type === 'clinic' ? data.services : data.items;
 
-    filteredClinics.forEach((clinic, index) => {
-        const card = document.createElement('div');
-        card.className = 'clinic-card';
-        card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.1}s`;
-        card.style.opacity = '0';
-        
-        card.innerHTML = `
-            <h3>${clinic.name}</h3>
-            <div class="clinic-info">
-                <div class="info-item">
-                    <i class="fas fa-location-dot"></i>
-                    <span>${clinic.address}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>${clinic.phone}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-kit-medical"></i>
-                    <span>${clinic.services.join(', ')}</span>
-                </div>
+    card.innerHTML = `
+        <h3>${data.name}</h3>
+        <div class="clinic-info">
+            <div class="info-item">
+                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                <span>${data.address}</span>
             </div>
-            <div class="clinic-actions">
-                <a href="tel:${clinic.phone}" class="btn btn-primary">Call Now</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=${clinic.coords}" target="_blank" class="btn btn-outline">Directions</a>
+            <div class="info-item">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <span>${data.phone}</span>
             </div>
-        `;
-        clinicGrid.appendChild(card);
-    });
+            <div class="info-item">
+                <i class="fas ${icon}" aria-hidden="true"></i>
+                <span><strong>${tag}:</strong> ${items.join(', ')}</span>
+            </div>
+        </div>
+        <div class="clinic-actions">
+            <a href="tel:${data.phone}" class="btn btn-primary" aria-label="Call ${data.name}">Call Now</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=${data.coords}" target="_blank" rel="noopener" class="btn btn-outline" aria-label="Get directions to ${data.name}">Directions</a>
+        </div>
+    `;
+    return card;
 }
 
-function displayShops(filteredShops) {
-    shopGrid.innerHTML = '';
-    
-    if (filteredShops.length === 0) {
-        shopGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light); padding: 2rem;">No shops found matching your search.</p>';
+function displayData(grid, list, type) {
+    grid.innerHTML = '';
+    if (list.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-light); padding: 3rem;">No ${type === 'clinic' ? 'clinics' : 'shops'} found matching your search.</p>`;
         return;
     }
 
-    filteredShops.forEach((shop, index) => {
-        const card = document.createElement('div');
-        card.className = 'clinic-card'; // Reuse same styling
-        card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.1}s`;
-        card.style.opacity = '0';
-        
-        card.innerHTML = `
-            <h3>${shop.name}</h3>
-            <div class="clinic-info">
-                <div class="info-item">
-                    <i class="fas fa-location-dot"></i>
-                    <span>${shop.address}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>${shop.phone}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-bag-shopping"></i>
-                    <span>${shop.items.join(', ')}</span>
-                </div>
-            </div>
-            <div class="clinic-actions">
-                <a href="tel:${shop.phone}" class="btn btn-primary">Call Now</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=${shop.coords}" target="_blank" class="btn btn-outline">Directions</a>
-            </div>
-        `;
-        shopGrid.appendChild(card);
+    const fragment = document.createDocumentFragment();
+    list.forEach((item, index) => {
+        const card = createCard(item, type);
+        card.style.animationDelay = `${index * 0.05}s`;
+        fragment.appendChild(card);
     });
+    grid.appendChild(fragment);
 }
 
 // Initial display
-displayClinics(clinics);
-displayShops(shops);
+function init() {
+    displayData(clinicGrid, clinics, 'clinic');
+    displayData(shopGrid, shops, 'shop');
+}
 
 // Search functionality
 function handleSearch() {
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchTerm = searchInput.value.toLowerCase().trim();
     
-    const filteredClinics = clinics.filter(clinic => 
-        clinic.name.toLowerCase().includes(searchTerm) || 
-        clinic.address.toLowerCase().includes(searchTerm) ||
-        clinic.services.some(s => s.toLowerCase().includes(searchTerm))
-    );
-    
-    const filteredShops = shops.filter(shop => 
-        shop.name.toLowerCase().includes(searchTerm) || 
-        shop.address.toLowerCase().includes(searchTerm) ||
-        shop.items.some(i => i.toLowerCase().includes(searchTerm))
-    );
+    const filterFn = (item) => {
+        const searchableText = [
+            item.name,
+            item.address,
+            ...(item.services || item.items)
+        ].join(' ').toLowerCase();
+        return searchableText.includes(searchTerm);
+    };
 
-    displayClinics(filteredClinics);
-    displayShops(filteredShops);
+    const filteredClinics = clinics.filter(filterFn);
+    const filteredShops = shops.filter(filterFn);
+
+    displayData(clinicGrid, filteredClinics, 'clinic');
+    displayData(shopGrid, filteredShops, 'shop');
 }
 
 searchBtn.addEventListener('click', handleSearch);
-searchInput.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') handleSearch();
-});
+searchInput.addEventListener('input', handleSearch); // Real-time search
 
 // Smooth Scroll for Navigation
 document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
@@ -215,12 +188,18 @@ document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
             e.preventDefault();
             const targetSection = document.querySelector(href);
             if (targetSection) {
+                const headerOffset = 80;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
                 window.scrollTo({
-                    top: targetSection.offsetTop - 80,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
             }
         }
     });
 });
-;
+
+// Run init
+document.addEventListener('DOMContentLoaded', init);
