@@ -18,7 +18,7 @@ const clinics = [
         address: "Vodra Moor (Opposite to Best Buy), Rajshahi",
         phone: "01771-533043",
         services: ["Dental Care", "Grooming", "Pathology"],
-        coords: "Vodra moar(opposit to Best Buy, Rajshahi 6207"
+        coords: "Pet 360°, Vodra moar(opposit to Best Buy, Rajshahi 6207"
     },
     {
         name: "Dr. Shazid's Pet Clinic",
