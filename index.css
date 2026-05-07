@@ -134,6 +134,7 @@ nav ul li a:hover {
     font-size: 1.1rem;
     outline: none;
     color: var(--text-dark);
+    text-overflow: ellipsis;
 }
 
 .search-container button {
@@ -628,20 +629,65 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 85vh;
+        padding: 8rem 5% 4rem;
+        justify-content: center;
+    }
+
     .hero h1 {
-        font-size: 2.75rem;
+        font-size: 2.4rem;
+        line-height: 1.2;
     }
+
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+        background: var(--glass);
+        padding: 1rem;
+        border-radius: 24px;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .search-container input {
+        padding: 1rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    .search-container button {
+        width: 100%;
+        padding: 1.1rem;
+        border-radius: 15px;
+        font-size: 1.1rem;
+    }
+
     header {
-        padding: 1.25rem 5%;
+        padding: 1rem 5%;
     }
+
     nav {
         display: none;
     }
+
     .contact-form {
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem;
     }
+
     .footer-content {
         gap: 3rem;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
     }
 }
 
