@@ -524,6 +524,13 @@ footer {
     opacity: 0.6;
 }
 
+.footer-disclaimer {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    opacity: 0.5 !important;
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
