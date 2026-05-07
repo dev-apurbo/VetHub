@@ -29,7 +29,7 @@ const clinics = [
     {
         name: "Dr. Shazid's Pet Clinic",
         address: "Vodra Moor, Rajshahi",
-        phone: "N/A",
+        phone: "01326520709",
         services: ["Consultation", "Pet Nutrition", "Skin Care"],
         coords: "Dr+Shazid+Pet+Clinic+Vodra+Moor+Rajshahi",
         rating: 4.5,
